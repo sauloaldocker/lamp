@@ -16,13 +16,27 @@
 		var fnadd = "127.0.0.1";
 		var exadd = "data.aflitos.net";
 		var data  = {
-			"Ajenti"   : [ "https://", inadd, fnadd, exadd,  ":8001/",  ":8001/",  ":8001/" ],
-			"BtSync"   : [ "http://" , inadd, fnadd, exadd,  ":8888/",  ":8888/",  ":8888/" ],
-			"GateOne"  : [ "http://" , inadd, fnadd, exadd,  ":8002/",  ":8002/",  ":8002/" ],
-			"Nginx"    : [ "http://" , inadd, fnadd, exadd,    ":80/",    ":80/",    ":80/" ],
-			"Shipyard" : [ "http://" , inadd, fnadd, exadd,  ":8000/",  ":8000/",  ":8000/" ],
-			"Webmin"   : [ "https://", inadd, fnadd, exadd, ":10000/", ":10000/", ":10000/" ],
-			"Wordpress": [ "http://" , inadd, fnadd, exadd,  ":8080/",  ":8080/",  ":8080/" ]
+			//NAME         PROT           IN    FWD  PROXY                   OPEN     IN PORT   FWD PORT PROXY PORT  OUT PORT  TEST
+			//             0               1      2      3                      4           5          6          7        8      9
+ 			"Admin"    : [ "http://" ,  null,  null,  null,    "admin.aflitos.net",      null,      null,      null,    null, false ],
+			"Calendar" : [ "http://" ,  null,  null,  null, "calendar.aflitos.net",      null,      null,      null,    null, true  ],
+			"Docs"     : [ "http://" ,  null,  null,  null,     "docs.aflitos.net",      null,      null,      null,    null, true  ],
+			"Drive"    : [ "http://" ,  null,  null,  null,    "drive.aflitos.net",      null,      null,      null,    null, true  ],
+			"Home"     : [ "https://",  null,  null,  null,     "home.aflitos.net",      null,      null,      null,    null, true  ],
+			"Main"     : [ "http://" ,  null,  null,  null,     "mail.aflitos.net",      null,      null,      null,    null, true  ],
+			"Sites"    : [ "https://",  null,  null,  null,    "sites.aflitos.net",      null,      null,      null,    null, true  ],
+			"Webmail"  : [ "http://" ,  null,  null,  null,  "webmail.aflitos.net",      null,      null,      null,    null, true  ],
+			"Work"     : [ "ftp://"  ,  null,  null,  null,     "work.aflitos.net",      null,      null,     ":21",    null, false ],
+			"Www"      : [ "http://" ,  null,  null,  null,      "www.aflitos.net",      null,      null,      null,    null, true  ],
+			"WWW2"     : [ "http://" ,  null,  null,  null,     "www2.aflitos.net",      null,      null,      null,    null, true  ],
+
+			"Ajenti"   : [ "https://", inadd, fnadd, exadd,                   null,  ":8001/",  ":8001/",  ":8001/",    null, true  ],
+			"BtSync"   : [ "http://" , inadd, fnadd, exadd,                   null,  ":8888/",  ":8888/",  ":8888/",    null, true  ],
+			"GateOne"  : [ "http://" , inadd, fnadd, exadd,                   null,  ":8002/",  ":8002/",  ":8002/",    null, true  ],
+			"Nginx"    : [ "http://" , inadd, fnadd, exadd,                   null,    ":80/",    ":80/",    ":80/",    null, true  ],
+			"Shipyard" : [ "http://" , inadd, fnadd, exadd,                   null,  ":8000/",  ":8000/",  ":8000/",    null, true  ],
+			"Webmin"   : [ "https://", inadd, fnadd, exadd,                   null, ":10000/", ":10000/", ":10000/",    null, true  ],
+			"Wordpress": [ "http://" , inadd, fnadd, exadd,                   null,  ":8080/",  ":8080/",  ":8080/",    null, true  ]
 		};
 
 
@@ -100,7 +114,7 @@
 			c11.rowSpan   = "2";
 
 			c12.innerHTML = "Address";
-			c12.colSpan   = "6";
+			c12.colSpan   = "8";
 
 			he1.appendChild( c11 );
 			he1.appendChild( c12 );
@@ -111,6 +125,7 @@
 			var c21       = document.createElement("th");
 			var c22       = document.createElement("th");
 			var c23       = document.createElement("th");
+			var c24       = document.createElement("th");
 
 			c21.innerHTML = "Internal";
 			c21.colSpan   = "2";
@@ -118,10 +133,13 @@
 			c22.colSpan   = "2";
 			c23.innerHTML = "Proxy";
 			c23.colSpan   = "2";
+			c24.innerHTML = "Open";
+			c24.colSpan   = "2";
 
 			he2.appendChild( c21 );
 			he2.appendChild( c22 );
 			he2.appendChild( c23 );
+			he2.appendChild( c24 );
 
 			tbl.appendChild( he2 );
 
@@ -129,31 +147,52 @@
 
 			for ( var ser in data ) {
 				var pro        = data [ ser ][0];
+
 				var adi        = data [ ser ][1];
 				var adf        = data [ ser ][2];
 				var adp        = data [ ser ][3];
-				var poi        = data [ ser ][4];
-				var pof        = data [ ser ][5];
-				var pop        = data [ ser ][6];
+				var ado        = data [ ser ][4];
 
-				console.log( pro, adi, adf, adp, poi, pof, pop );
+				var poi        = data [ ser ][5];
+				var pof        = data [ ser ][6];
+				var pop        = data [ ser ][7];
+				var poo        = data [ ser ][8];
+
+				var tst        = data [ ser ][9];
+
+				var pit        = "";
+				var pft        = "";
+				var ppt        = "";
+				var pot        = "";
+
+				if ( poi ) { pit = poi; }
+				if ( pof ) { pft = pof; }
+				if ( pop ) { ppt = pop; }
+				if ( poo ) { pot = poo; }
+			
+				console.log( pro, adi, adf, adp, ado, poi, pof, pop, poo );
 
 				var alt        = "<b>"+ser+"</b>";
 				var ali        = document.createElement("a");
 				var alf        = document.createElement("a");
 				var alp        = document.createElement("a");
+				var alo        = document.createElement("a");
 
-				ali.innerHTML  = pro + adi + poi;
-				ali.href       = pro + adi + poi;
+				ali.innerHTML  = pro + adi + pit;
+				ali.href       = pro + adi + pit;
 				ali.target     = '_blank';
 
-				alf.innerHTML  = pro + adf + pof;
-				alf.href       = pro + adf + pof;
+				alf.innerHTML  = pro + adf + pft;
+				alf.href       = pro + adf + pft;
 				alf.target     = '_blank';
 
-				alp.innerHTML  = pro + adp + pop;
-				alp.href       = pro + adp + pop;
+				alp.innerHTML  = pro + adp + ppt;
+				alp.href       = pro + adp + ppt;
 				alp.target     = '_blank';
+
+				alo.innerHTML  = pro + ado + pot;
+				alo.href       = pro + ado + pot;
+				alo.target     = '_blank';
 
 				var row        = document.createElement("tr");
 
@@ -168,16 +207,20 @@
 				var ce41       = document.createElement("td");
 				var ce42       = document.createElement("td");
 
+				var ce51       = document.createElement("td");
+				var ce52       = document.createElement("td");
 
 				ce22.id        = url2id( "i_" + ali.href );
 				ce32.id        = url2id( "f_" + alf.href );
 				ce42.id        = url2id( "p_" + alp.href );
+				ce52.id        = url2id( "o_" + alo.href );
 
 				ce11.innerHTML = alt;
 
-				ce21.appendChild( ali );
-				ce31.appendChild( alf );
-				ce41.appendChild( alp );
+				if (( adi ) || ( poi )) { ce21.appendChild( ali ); }
+				if (( adf ) || ( pof )) { ce31.appendChild( alf ); }
+				if (( adp ) || ( pop )) { ce41.appendChild( alp ); }
+				if (( ado ) || ( poo )) { ce51.appendChild( alo ); }
 
 				row.appendChild( ce11 );
 
@@ -190,11 +233,15 @@
 				row.appendChild( ce41 );
 				row.appendChild( ce42 );
 
+				row.appendChild( ce51 );
+				row.appendChild( ce52 );
+
 				tbl.appendChild( row );
 
-				reqs.push( [ ali.href, ce22.id ] );
-				reqs.push( [ alf.href, ce32.id ] );
-				reqs.push( [ alp.href, ce42.id ] );
+				if ( (( adi ) || ( poi )) && tst ) { reqs.push( [ ali.href, ce22.id ] ); }
+				if ( (( adf ) || ( pof )) && tst ) { reqs.push( [ alf.href, ce32.id ] ); }
+				if ( (( adp ) || ( pop )) && tst ) { reqs.push( [ alp.href, ce42.id ] ); }
+				if ( (( ado ) || ( poo )) && tst ) { reqs.push( [ alo.href, ce52.id ] ); }
 			}
 
 			bdy.appendChild( tbl );
