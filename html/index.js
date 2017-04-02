@@ -19,7 +19,7 @@
 		iframe.onerror          = function () { returnStatus(address, ref, iframe,   0); };
 		iframe.style.visibility = 'hidden';
 		iframe.src              = address;
-		document.body.appendChild(iframe);
+		//document.body.appendChild(iframe);
 		return;
         }
 
